@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <textarea id="text" onkeydown="checknum()" onkeyup="checknum()" ></textarea>
+        <input id="in" type="text" disabled="disabled" />
+        <script>
+            function checknum(){
+                var nMax = 10;
+                var textDom =  document.getElementById("text");
+                var len =textDom.value.length;    
+                if(len>nMax){
+                    textDom.value = textDom.value.substring(0,nMax);
+                    return;
+                }
+                document.getElementById("in").value="你还可以输入"+(nMax-len)+"个字";
+            }
+        </script>
+</body>
+</html>
