@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea name="" cols="30" rows="10" data-target="autoKeyWordSelect" id="contentCheckBox"></textarea>
+    <br>
+    <label for="">js</label>
+    <input type="checkbox" name="autoKeyWordSelect" data-K="js">
+    <label for="">美女</label>
+    <input type="checkbox" name="autoKeyWordSelect" data-K="美女">
+    <label for="">帅哥</label>
+    <input type="checkbox" name="autoKeyWordSelect" data-K="帅哥">
+    <script>
+        window.onload = function () {
+            var contentCheckBox = document.getElementById('contentCheckBox'),
+                _targets = document.getElementsByName(contentCheckBox.getAttribute('data-target')),
+                targetLen = _targets.length,
+                i = 0;
+            contentCheckBox.onkeyup = function () {
+                for (i = 0; i < targetLen; i++) {
+                    var _t = _targets[i],
+                        _v = this.value;
+                    _t.checked = _v.search(_t.getAttribute('data-K')) != -1 && true || false;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
