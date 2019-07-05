@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <select id="provinces"></select>
+    <select id="citys"></select>
+    <script>
+        window.onload = function () {
+            var linkDatas = {   //定义省市节点数据结构
+                provinces: [{
+                    'code': '0',    
+                    'name': '请选择'
+                }, {
+                    'code': '1',
+                    'name': '北京市'
+                }, {
+                    'code': '2',
+                    'name': '上海市'
+                }, {
+                    'code': '3',
+                    'name': '深圳市'
+                }, {
+                    'code': '4',
+                    'name': '重庆市'
+                }],
+                citys: {    //对象里面 
+                    0:['请选择'],
+                    1:['北京市','北京市','北京市','北京市','北京市','北京市'],
+                    2:['上海市'],
+                    3:['深圳市'],
+                    4:['重庆市'],
+                } 
+            };
+
+            function addOptions(target, options) {
+                var _option = null,
+                    _ol = options.length,
+                    _i = 0,
+                    _v = '',
+                    _t = '';
+                for (; _i < _ol; _i++) {
+                    _v = options[_i].value;
+                    _t = options[_i].text;
+                    _option = document.createElement('OPTION');
+                    _option.value = _v;
+                    _option.text = _t;
+                    target.options.add(_option)
+                }
+            }
+
+            function linkage(parents, childs) {
+                var _linkDatas = linkDatas,
+                    _parents = _linkDatas.provinces,
+                    _childs = _linkDatas.citys,
+                    _initCity = _childs[0],
+                    _p = [];
+                for (var i in _parents) {
+                    _p.push({
+                        "text": _parents[i].name,
+                        "value": _parents[i].code
+                    });
+                }
+                addOptions(parents, _p);
+                addOptions(childs, [{
+                    "value": _initCity,
+                    "text": _initCity
+                }]);
+                parents.onchange = function () {
+                    var __childs = _childs[this.value],
+                        __childLen = __childs.length,
+                        l = 0,
+                        __p = [];
+                    childs.innerHTML = '';
+                    for (; l < __childLen; l++) {
+                        __p.push({
+                            "text": __childs[l],
+                            "value": __childs[l]
+                        })
+                    }
+                    addOptions(childs, __p)
+                }
+            }
+            linkage(document.getElementById('provinces'), document.getElementById('citys'))
+        }
+    </script>
+</body>
+
+</html>
