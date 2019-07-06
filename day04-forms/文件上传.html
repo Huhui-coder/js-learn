@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>对文件上传的相关操作</p>
+    <form action="" id="fileUpload" enctype="multipart/form-data">
+        <p><input type="file" id="fileDemo"> 上传</p>
+    <ul>
+        <li>文件上传后，在控制台输入  document.getElementById('fileDemo').files</li>
+        <li>即可打印出文件的所有属性</li>
+        <pre>
+                FileList {0: File, length: 1}
+                0: File
+                lastModified: 1553260723198
+                lastModifiedDate: Fri Mar 22 2019 21:18:43 GMT+0800 (中国标准时间)
+                __proto__: Object
+                name: "微信图片_20190322211839.jpg"
+                size: 52267
+                type: "image/jpeg"
+                webkitRelativePath: ""
+                __proto__: File
+                length: 1
+        </pre>
+    </ul>
+    
+    </form>
+
+
+
+</body>
+</html>

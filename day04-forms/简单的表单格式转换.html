@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>表单格式转换</p>
+    <script>
+    window.onload = function(){
+        getLowerCase = function(str,type){
+            type = type || 'locale';
+            type === 'locale'&&str.toLocaleUpperCase()||str.toUpperCase();
+            document.write(str.toLocaleUpperCase())
+        }
+        getLowerCase('ajiajaHSIHAIAHI','locale')
+    }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" id="clearFrom">
+        <input type="button" id="clearText" value="清空">
+        <input type="text" value="文本1">
+        <textarea name="" id="" cols="30" rows="10">文本2</textarea>
+    </form>
+    <script>
+        window.onload = function () {
+            var _clearText = document.getElementById('clearText');
+            _clearText.onclick = function () {
+                var _element = document.getElementById('clearFrom').elements, //获取form 表单控件下的所有元素  返回的是一个对象
+                    /*
+                HTMLFormControlsCollection(3) [input#clearText, input, textarea, clearText: input#clearText]
+                            0: input#clearText
+                            1: input
+                            2: textarea
+                            length: 3
+                            clearText: input#clearText
+                            __proto__: HTMLFormControlsCollection
+                */
+                    _elementLen = _element.length,
+                    _ei = null,
+                    i = 0;
+                for (; i < _elementLen; i++) {
+                    _ei = _element[i];
+                    (_ei.type == 'text' || _ei.type == 'textarea') && (_ei.value = '');
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
