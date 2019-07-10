@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="demo.js"></script>
+</head>
+<body>
+    <div id="box" style="color: red">box</div>
+    <p>text</p>
+    <p>text</p>
+    <p>text</p>
+    <p>text</p>
+    <script>
+        window.onload = function (){
+            // var base = new Base();
+            alert($().getId('box').css('color'))
+            // $().getTagName('p').css('color','red').css('fontSize').click(function (){alert('onclick')})
+        }    
+    </script>
+</body>
+</html>
