@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./animateManger.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <img id="focusPointSource" class="miniImages" src="./部署.jpg" alt="">
+    <script>
+    window.onload = function(){
+        document.getElementById('focusPointSource').onclick = function (){
+            new animateManger({
+                "context":this,
+                "effect":"linear",
+                "time":50000,
+                "startCss":{
+                    "left":0
+                },
+                "css":{
+                    "left":800
+                },
+                "callback":function(){
+                    alert('over')
+                }
+            }).init();
+        }
+    }
+    </script>
+</body>
+</html>
