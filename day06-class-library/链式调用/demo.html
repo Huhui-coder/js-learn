@@ -8,15 +8,18 @@
     <script src="demo.js"></script>
 </head>
 <body>
-    <div id="box" style="color: red">box</div>
-    <p>text</p>
-    <p>text</p>
-    <p>text</p>
-    <p>text</p>
+    <div id="box" class="cl"  style="color: red">box</div>
+    <p class="classN">text</p>
+    <p class="classN">text</p>
+    <p class="classN">text</p>
+    <p class="classN">text</p>
+    <pre>
+        获取所有的节点==> document.getElementsByTagName('*')
+    </pre>
     <script>
         window.onload = function (){
             // var base = new Base();
-            alert($().getId('box').css('color'))
+            $().getClass('classN').getElement(2).css('color','white')
             // $().getTagName('p').css('color','red').css('fontSize').click(function (){alert('onclick')})
         }    
     </script>

@@ -13,8 +13,24 @@ function Base() {
             this.elements.push(tags[i])
         }
         return this;
+    } 
+    this.getClass = function (className) {
+        var all = document.getElementsByTagName('*');
+        for (var i = 0; i < all.length; i++) {
+            if(all[i].className == className){
+                this.elements.push(all[i])
+            }
+        }
+        return this;
     }
 };
+//获取某一个DOM节点
+Base.prototype.getElement = function(num){
+    var elements = this.elements[num];
+    this.elements = [];
+    this.elements[0] = elements;
+    return this;
+}
 Base.prototype.css = function (attr, value) {  //将Base 的方法挂载到原型链上
     if (attr && value) {
         for (var i = 0; i < this.elements.length; i++) {  //对节点进行遍历
@@ -22,7 +38,7 @@ Base.prototype.css = function (attr, value) {  //将Base 的方法挂载到原�
         }
     } else {
         for (let i = 0; i < this.elements.length; i++) {  //对节点进行遍历
-            return this.elements[i].style[attr];  // 用原生方法实现操作
+            return this.elements[i].style[attr];  // 如果没有传value 值进来直接 返回当前DOM节点的属性值
         }
     }
 
