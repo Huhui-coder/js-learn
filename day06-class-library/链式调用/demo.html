@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="demo.js"></script>
+    <style>
+    .classN {
+        display: none;
+    }
+    </style>
 </head>
 <body>
     <div id="box" class="cl"  style="color: red">box</div>
@@ -19,8 +24,13 @@
     <script>
         window.onload = function (){
             // var base = new Base();
-            $().getClass('classN').getElement(2).css('color','white')
+            // $().getClass('classN').getElement(2).css('color','white')
             // $().getTagName('p').css('color','red').css('fontSize').click(function (){alert('onclick')})
+            $().getId('box').click(function(){
+                $(this).css('color','black')  //将当前this对象传进去  在方法里 将其赋值给 this.elements[0]  $(this). ==>是能调用到挂载到Base上的方法，在Base 当中this.elements[0] 是指向当前的html DOM 
+            })
+            // $().getTagName('p').css('color','red').css('fontSize').click(function (){alert('onclick')})
+
         }    
     </script>
 </body>
