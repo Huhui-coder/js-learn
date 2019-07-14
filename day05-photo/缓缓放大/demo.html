@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片单击之后缓缓放大</title>
+    <style>
+    body{
+        width: 100%;
+        height: 100%;
+    }
+    img{
+        width: 100px;
+        height: 100px;
+    }
+    </style>
+</head>
+<body>
+    <img src="https://img.alicdn.com/imgextra/i3/928622636/O1CN01OisMVJ1VLKYvyyl1Z_!!0-item_pic.jpg_430x430q90.jpg" alt="">
+    <script>
+    window.onload = function(){
+        var imgUrl = document.getElementsByTagName('img')[0];
+        var flag = false;
+        imgUrl.addEventListener('click',function(){
+            if(flag){
+                imgUrl.style.width = 100 +'%'
+                imgUrl.style.height = 100 +'%'
+                flag = false
+            }else{
+                imgUrl.style.width = 100 + 'px'
+                imgUrl.style.height = 100 + 'px'
+                flag = true
+            }
+        },true)
+    }
+    </script>
+</body>
+</html>
