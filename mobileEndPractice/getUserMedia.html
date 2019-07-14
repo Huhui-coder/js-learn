@@ -38,7 +38,7 @@
     var context = canvas.getContext('2d');
     //成功的回调函数
     function success(stream){
-        //坚韧的webkit核心浏览器
+        //兼容的webkit核心浏览器
         var CompatibleURL = window.URL || window.webkitURL
         //将视频流设置为video元素的源
         // video.src = CompatibleURL.createObjectURL(stream); //该方法已被弃用
