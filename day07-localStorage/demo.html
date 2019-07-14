@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./BaseStorage.js"></script>
+</head>
+
+<body>
+    <script>
+        let a = new BS('_', '@');
+        a.set('name', '123')
+        a.get('name') // {status: 0, value: "123"}
+        // 设置失效时间
+        a.set('name', '123', null, new Date().getTime() + 1000 * 60 * 60 * 24 * 31)
+        // 移除
+        a.remove('name')
+    </script>
+</body>
+
+</html>
