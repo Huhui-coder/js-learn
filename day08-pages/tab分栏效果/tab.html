@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tab分栏</title>
+    <style>
+    h2,h5,#tooltipMsg,p{
+        white-space: nowrap;
+    }
+    .tabSwitchParent {
+        position: relative;
+        height: 100px;
+        width: 200px;
+    }
+    .tabSwitchParent div{
+        position: relative;
+        float: left;
+    }
+    .tabSwitchTarget{
+        display: none;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        width:324px ;
+        height: 200px;
+        padding: 5px;
+        border: 1px solid #333;
+        color: #666;
+    }
+    #tabSwitch{
+        position: relative;
+        float: left;
+        z-index: 2;
+        top: 1px;
+        font-size: 15px;
+        margin: 0;
+        text-align: center;
+        cursor: pointer;
+    }
+    #tabSwitch .on{
+        border: 1px solid #333;
+        border-bottom: none;
+        background-color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="tabSwitchParent">
+        <!-- 选项卡 -->
+        <div id="tabSwitch">
+            <div data-target='tabSwitch1' class="on">选项卡一</div>
+            <div data-target='tabSwitch2'>选项卡二</div>
+            <div data-target='tabSwitch3'>选项卡三</div>
+        </div>
+        <!-- 内容区 -->
+        <div class="tabSwitchTarget" style="display:block;color:#123323" id="tabSwitch1">
+            选项卡一
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae magnam error laborum voluptas quas velit
+            dicta nisi, accusamus cumque inventore ab? Velit quibusdam ullam architecto voluptate deleniti enim error.
+            Repellat.
+        </div>
+        <div class="tabSwitchTarget" style="display:none;columns: #999999;" id="tabSwitch2">
+            选项卡二
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae magnam error laborum voluptas quas velit
+            dicta nisi, accusamus cumque inventore ab? Velit quibusdam ullam architecto voluptate deleniti enim error.
+            Repellat.
+        </div>
+        <div class="tabSwitchTarget" style="display:none;columns: #000000;" id="tabSwitch3">
+            选项卡三
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae magnam error laborum voluptas quas velit
+            dicta nisi, accusamus cumque inventore ab? Velit quibusdam ullam architecto voluptate deleniti enim error.
+            Repellat.
+        </div>
+    </div>
+    <script>
+    window.onload = function(){
+        function getTypeElements(es,type){   //获得指定div节点下的 DOM 节点
+            var esLen = es.length,
+                i = 0,
+                eArr = [],
+                esl = null;
+            for(;i<esLen;i++){
+                esl = es[i];
+                if(esl.nodeName.replace("#","").toLocaleLowerCase() == type){
+                    eArr.push(esl);
+                }
+            }
+            return eArr;
+        }
+        function tabSwitch(e){
+            var divs = getTypeElements(e.childNodes,"div"),  //只把#tabSwitch下的 div筛选出来
+                l = divs.length,
+                i = 0;
+            for(;i<l;i++){  //循环所有的divs
+                divs[i].onclick = function(){  //为每一个divs绑定单击事件
+                    for(var ii = 0;ii<l;ii++){  //每一个divs单击之后，都要将所有的divs设置为隐藏
+                        divs[ii].className = "";
+                        document.getElementById("tabSwitch"+(ii+1)).style.display = "none";
+                    }
+                    this.className = "on";
+            document.getElementById(this.getAttribute("data-target")).style.display = "block"  //只为当前所点击的进行显示
+                }  // 在html 标签中写 data-* 在js中通过 getAttribute中取得它的值
+            }
+        }
+        tabSwitch(document.getElementById("tabSwitch"));
+    }
+    </script>
+</body>
+
+</html>
