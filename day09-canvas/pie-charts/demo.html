@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pie-charts</title>
+</head>
+<body>
+    <pre>
+        canvas 常用api
+        var canvas = document.getElementById("canvas");  //获取canvas 对象
+        var ctx = canvas.getContext("2d");  //获得上下文对象
+        ctx.fillStyle = "rgb(200,0,0)";  //设置或返回用于填充绘画的颜色、渐变或模式
+        ctx.fillRect (10, 10, 55, 50); //绘制“被填充”的矩形
+        ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+        ctx.fillRect (30, 30, 55, 50);
+        //画了个矩形
+    </pre>
+
+    <canvas class="pie-charts" width="850" height="500"></canvas>
+    <script src="./demo.js"></script>
+</body>
+</html>
