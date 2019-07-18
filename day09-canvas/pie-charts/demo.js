@@ -1,4 +1,3 @@
-window.onload = function () {
     let Piecharts = function (selector, options) {
         let canvas = "string" === typeof selector ? document.querySelector(selector) : null;
         if (canvas === null) return false;
@@ -17,33 +16,12 @@ window.onload = function () {
         this.width = canvas.getAttribute("width") || 300;
         this.height = canvas.getAttribute("height") || 300;
         this.options = Object.assign(defaultOptions, options); //Object.assign(source,target)
-        const data = [{
-            title: '沪江网校',
-            value: 1024
-        },
-        {
-            title: '沪江网校',
-            value: 2012
-        },
-        {
-            title: '沪江网校',
-            value: 588
-        },
-        {
-            title: '沪江网校',
-            value: 656
-        }
-    ];
-        var pie = new Piecharts(".pie-charts", {
-            legend: true
-        });
-        pie.load(data).render();
+        
     }
     
 
     Piecharts.prototype.load = function (data) {
-        console.log('this.ctx'+this.ctx);
-        
+        // console.log('this.ctx'+this.ctx);
         data.forEach(item => this.count ? this.count += item.value : this.count = item.value);
         this.data = data;
         return this;
@@ -89,5 +67,3 @@ window.onload = function () {
         });
         return this;
     }
-
-}
