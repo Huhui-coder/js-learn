@@ -48,7 +48,7 @@
             this.ctx.beginPath(); //开始一条路径
             this.ctx.moveTo(this.width / 2, this.height / 2);
             let startarc = temparc,
-                endarc = startarc + (item.value / this.count) * Math.PI * 2;
+                endarc = startarc + (item.value / this.count) * Math.PI * 2; //根据data中的value值来确定圆弧的大小
             this.ctx.arc( //创建弧/曲线（用于创建圆形或部分圆）context.arc(x,y,r,sAngle,eAngle,counterclockwise);counterclockwise	可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。
                 this.width / 2,
                 this.height / 2,
@@ -57,7 +57,7 @@
                 endarc,
                 false
             );
-            this.ctx.closePath();
+            this.ctx.closePath();  //结束一条路径
             this.ctx.fillStyle = item.color;
             this.ctx.fill();
             temparc = endarc;
