@@ -1,0 +1,55 @@
+<html>
+<pre>
+        async/await 来处理异步
+
+        先看一个最简单的async 函数
+
+        async function timeout() {
+            　　return 'hello world';
+            }
+        该函数返回的是一个Promise对象
+        使用then()来获取回调返回的值
+        timeout().then(result => {
+            console.log(result);
+        })
+
+        因为 async 函数返回一个 Promise 对象，
+        所以 await 可以用于等待一个 async 函数的返回值——这也可以说是 await 在等 async 函数，
+        但要清楚，它等的实际是一个返回值。注意到 await 不仅仅用于等 Promise 对象，
+        它可以等任意表达式的结果，所以，await 后面实际是可以接普通函数调用或者直接量的。
+    </pre>
+<script>
+    function doubleAfter2seconds(num) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(2 * num)
+            }, 2000);
+        })
+    }
+    async function testResult() {
+        let result = await doubleAfter2seconds(30);
+        console.log(result);
+    }
+    //await 关键字表示等待的意思，等待这个异步函数执行完毕之后，
+    //再执行后面的语句，但是 await后面不是只能跟 异步函数 它可以跟上任何函数
+</script>
+<script>
+    function doubleAfter2seconds(num) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(2 * num)
+            }, 2000);
+        })
+    }
+async function testResult() {
+    let first = await doubleAfter2seconds(30);
+    let second = await doubleAfter2seconds(50);
+    let third = await doubleAfter2seconds(30);
+    console.log(first + second + third);
+    //会依次输出异步函数返回的值，完美解决了回调地狱
+}
+</script>
+<a href="https://segmentfault.com/a/1190000007535316">具体例子</a>
+
+
+</html>

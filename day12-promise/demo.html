@@ -1,0 +1,165 @@
+<html>
+<pre>
+    JS是单线程的非阻塞脚本语言
+    何所谓单线程：指的是同一时刻，只有一个主线程来执行所有的任务。
+    何所谓非阻塞：指的是需要执行异步代码时，js不会一直等到异步代码执行完毕后，再执行下一个代码块，
+    而是会将该异步代码进入到一个pending状态，转头去执行其他的同步代码，等到异步代码执行完毕后，
+    再将执行相应的回调函数。
+</pre>
+<script>
+    window.onload = function () {
+        setTimeout(function () {
+            console.log(1);
+        }, 600);
+
+        new Promise(function (resolve, reject) {
+            console.log(2)
+            resolve(3)
+        }).then(function (val) {
+            console.log(val);
+        })
+    }
+
+    // 以上代码的输出顺序为 2 3 1
+    //注意以上代码 只是new Promise 实例化一个promise对象，就执行了后面的代码
+    //new Promise 为微任务
+    //setTimeout  为宏任务
+</script>
+<pre>
+    异步代码又分为宏任务和微任务
+    宏任务：
+        setTimeout()
+        setInterval()
+    微任务：
+        new Promise()
+        new MutaionObserve()
+
+    只有主线程中的同步任务执行完毕后，会去任务队列中执行微任务，只有微任务也执行完毕后，才会去执行宏任务。
+    简而言之，同步任务永远在微任务之前执行，微任务永远在宏任务之前执行。
+</pre>
+<script>
+    function runAsync1() {
+        var p = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log('执行完成1')
+                resolve('icessun1');
+            }, 2000);
+        });
+
+        return p; // 返回p实例对象
+    }
+
+    function runAsync2() {
+        var p = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log('执行完成2')
+                resolve('icessun2');
+            }, 2000);
+        });
+
+        return p; // 返回p实例对象
+    }
+
+    function runAsync3() {
+        var p = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log('执行完成3')
+                resolve('icessun3');
+            }, 2000);
+        });
+
+        return p; // 返回p实例对象
+    }
+
+    // 正确的打开Promise的方法
+    runAsync1()
+        .then(function (data) {
+            console.log(data);
+            return runAsync2();
+        })
+        .then(function (data) {
+            console.log(data);
+            return runAsync3();
+        })
+        .then(function (data) {
+            console.log(data);
+        })
+</script>
+<pre>
+    一个promise 构造函数，接收一个回调函数，其中有两个参数，一个是resolve，和reject。   
+        resolve是成功的回调，可以在then()里面获取到返回的参数
+        reject是失败的回调，可以在catch()里面获取到返回的参数
+
+</pre>
+<script>
+    Promise
+        .all([runAsync1(), runAsync2(), runAsync3()])
+        .then(function (results) {
+            console.log(results);
+        });
+</script>
+<pre>
+        Promise.all来执行前面的三个异步的函数，all()接收一个数组参数，
+        里面的执行最终都返回Promise对象，只有等三个异步操作都执行完成后才会进入到then里面，
+        all会把所有的异步操作的结果放在一个数组中传给then，就是上面的results，代码的输出结果：
+        执行完成1
+        执行完成2
+        执行完成3
+        ['icesssun1','icesssun2','icesssun3']
+        有了all，可以并行执行多个异步操作，并且在一个回调中处理所有的返回数据，
+        一个常用的场景：游戏类的素材比较多的应用，打开网页的时候，预先加载需要用到的各种资源，
+        如图片，flash以及各种静态文件，等到所有都加载完成，我们再进行页面的初始化。
+</pre>
+<script>
+    Promise
+        .race([runAsync1(), runAsync2(), runAsync3()])
+        .then(function (results) {
+            console.log(results);
+        });
+</script>
+<pre>
+    Promise.race() 也是Promise上的方法，它与Promise.all()方法不同，Promise.all()
+    谁的程序执行的慢，就等谁执行完才回调。但是对于race来说：谁的程序执行的快，
+    就以它为标准调用回调函数，其用法基本上是一样的，把上面runAsync1函数的延迟改为1秒
+    输入结果就变为
+    执行完成1
+    icesssun1
+    执行完成2
+    执行完成3
+    这三个 异步操作同样是并行执行的，但是等到1秒后，runAsync1已经执行完毕，于是then接受到了执行完毕的回调，
+    输出回调结果；与此同时，runAsyn2和runAsyn3也继续执行，输出了执行的结果，但是不能回调then方法。
+</pre>
+<script>
+    //具体运用场景
+    // 请求某个图片资源 异步
+    function requestImg() {
+        var p = new Promise(function (resolve, reject) {
+            var img = new Image(); // 创建一个图片对象实例 Image后面没有参数的时候，括号可以省略
+            img.src = 'xxxxx'; // 给对象上面的属性设置属性值
+            img.onload = function () {
+                resolve(img); // 图片成功加载的时候，把img对象作为参数传到回调函数里面
+            }
+        });
+        return p; // 当调用这个函数的时候可以使用then方法
+    }
+
+    // 延时函数 给请求计时
+    function timeout() {
+        var p = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject('图片请求超时');
+            }, 4000);
+        });
+        return p;
+    }
+
+    Promise.race([requsetImg(), timeout()])
+        .then(function (results) {
+            console.log(results); // 图片成功加载会把图片的路径打印在控制台
+        })
+        .catch(function (reason) {
+            console.log(reason); // 失败会提示加载失败
+        })
+</script>
+
+</html>
