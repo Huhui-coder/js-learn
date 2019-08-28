@@ -162,4 +162,35 @@
         })
 </script>
 
+
+<script>
+    //将一个ajax请求包装成Promise
+    function ajax(url) {
+        return new Promise(function (resolve, reject) {
+            var xmlRequest = new XMLHttpRequest();
+            xmlRequest.onreadystatechange = function () {
+                if (xmlRequest.status === XMLHttpRequest.DONE) {
+                    if (xmlRequest.status === 200) {
+                        //成功时，结果采用resolve 回调返回
+                        resolve(xmlRequest.responseText);
+                    } else {
+                        //失败时，将出错的信息采用reject 回调返回
+                        reject(new Error('错误码为:' + xmlRequest.status))
+                    }
+                }
+            }
+            xmlRequest.open('get', url);
+            xmlRequest.send(null);
+        })
+    }
+
+    //调用时 
+
+    ajax('http://huiang.com').then(function (data) {
+        //成功返回的内容
+    }).catch(function (err) {
+        //失败返回的内容
+    })
+</script>
+
 </html>
